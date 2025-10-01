@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary -->
+  <title>Password Health Checker | Free Online Password Strength Test & Generator</title>
+  <meta name="title" content="Password Health Checker | Free Online Password Strength Test & Generator" />
+  <meta name="description" content="Check your password strength instantly and generate secure passwords with our free, 100% client-side tools. Nothing leaves your device." />
+  <link rel="canonical" href="https://www.passwordhealthchecker.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.passwordhealthchecker.com/" />
+  <meta property="og:title" content="Password Health Checker | Free Online Password Strength Test & Generator" />
+  <meta property="og:description" content="Boost your security with a free password checker and generator — private and 100% client-side." />
+  <meta property="og:image" content="https://www.passwordhealthchecker.com/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.passwordhealthchecker.com/" />
+  <meta name="twitter:title" content="Password Health Checker | Free Online Password Strength Test & Generator" />
+  <meta name="twitter:description" content="Free password strength checker and generator — nothing leaves your device." />
+  <meta name="twitter:image" content="https://www.passwordhealthchecker.com/og-image.png" />
+
+  <!-- Helpful -->
+  <meta name="author" content="Dragonfire Creative Studio" />
+  <meta name="keywords" content="password strength checker, secure password generator, free password tool, client-side security" />
+
+  <!-- Favicons + PWA -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#00BFFF" />
+
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "526649c52b894849b9757e54098a8a3f"}'></script><!-- End Cloudflare Web Analytics -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0C0F15; /* Updated from Figma */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+        .strength-bar {
+            transition: width 0.4s ease-in-out, background-color 0.4s ease-in-out;
+        }
+        .copy-message {
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #00BFFF; /* Updated color */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(0, 191, 255, 0.5);
+        }
+        /* Full-width container for the navbar */
+        .navbar-container {
+            width: 100%;
+            background-color: #0C0F15; /* Updated to match body color */
+        }
+        .full-width-footer {
+            width: 100%;
+            background-color: #0C0F15; /* Updated to match body color */
+        }
+
+        /* Custom styles for the checkbox to make it appear brighter */
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            width: 1.25rem; /* Equivalent to w-5 */
+            height: 1.25rem; /* Equivalent to h-5 */
+            background-color: #12151C; /* Darker than the background of the main box to make the border stand out */
+            border-radius: 0.25rem; /* rounded-md */
+            border: 2px solid #334155; /* A dark gray border to start */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: #00BFFF; /* Updated color */
+            border-color: #00BFFF; /* Updated color */
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.6); /* Add a light blue glow */
+        }
+
+        /* Checkmark icon for the checked state, using a unicode character and styling it white */
+        input[type="checkbox"]:checked::before {
+            content: '\2713'; /* Unicode for the simple check mark */
+            color: white;
+            display: block;
+            text-align: center;
+            line-height: 1;
+            font-size: 1rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        input[type="checkbox"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.4); /* Brighter focus ring */
+        }
+    </style>
+</head>
+<body class="overflow-y-auto">
+    <!-- Navbar Section (Header Nav Links Removed) -->
+    <nav class="navbar-container py-4">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <!-- Logo and App Name -->
+            <div class="flex items-center space-x-3">
+              <a href="index.html" class="flex items-center space-x-3 hover:opacity-90 transition">
+  <!-- SVG Icon for the lock -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-[#00BFFF]">
+    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
+  </svg>
+  <span class="text-2xl font-bold text-gray-100">Password Health Checker</span>
+</a>
+            </div>
+            <!-- Privacy Text (Kept) -->
+            <div class="hidden sm:block">
+                <p class="text-gray-400 text-sm">
+                    100% client-side • Nothing leaves your device
+                </p>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="w-full max-w-4xl mx-auto mt-8 px-4">
+        <!-- Main Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-[#00BFFF] mb-4 tracking-tight">Protect Your Digital World</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                Instantly check your password's strength and generate unbreakable passwords to secure your accounts. Take control of your cybersecurity with our advanced, **100% private** tools.
+            </p>
+        </header>
+
+        <!-- Feature Blocks Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-center">
+            <!-- Security Analysis -->
+            <div class="p-6 bg-[#12151C] rounded-lg border border-gray-700 shadow-md">
+                <div class="flex justify-center items-center mb-3">
+                    <svg class="w-12 h-12 text-[#00BFFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.015 12.015 0 002.944 12c.005 3.09 1.488 6.002 4.148 8.05l.004.003A12.008 12.008 0 0012 21.056a12.008 12.008 0 005.908-1.003l.004-.003c2.66-2.048 4.143-4.96 4.148-8.05a12.015 12.015 0 00-2.88-9.056z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-200">Security Analysis</h3>
+                <p class="text-sm text-gray-400 mt-2">Instantly evaluate your password's strength and get a detailed analysis.</p>
+            </div>
+            <!-- Instant Generation -->
+            <div class="p-6 bg-[#12151C] rounded-lg border border-gray-700 shadow-md">
+                <div class="flex justify-center items-center mb-3">
+                    <svg class="w-12 h-12 text-[#00BFFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-200">Instant Generation</h3>
+                <p class="text-sm text-gray-400 mt-2">Create a hack-proof password in seconds with our customizable generator.</p>
+            </div>
+            <!-- Privacy First -->
+            <div class="p-6 bg-[#12151C] rounded-lg border border-gray-700 shadow-md">
+                <div class="flex justify-center items-center mb-3">
+                    <svg class="w-12 h-12 text-[#00BFFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-200">Privacy First</h3>
+                <p class="text-sm text-gray-400 mt-2">Relax, your passwords never leave your device. All analysis is 100% client-side.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-200 mb-2">Password Security Tools</h2>
+            <p class="text-gray-400 text-sm max-w-lg mx-auto">
+                Use our comprehensive suite of password tools to easily enhance your digital security
+            </p>
+        </div>
+
+        <!-- Password Strength Checker Section -->
+        <div id="checker-content" class="p-6 bg-[#12151C] rounded-lg border border-gray-700 mb-8 shadow-2xl">
+            <div class="flex flex-col items-center text-center mb-4">
+                <h2 class="text-2xl font-semibold text-gray-200 flex items-center mb-2">
+                    <svg class="w-7 h-7 text-[#00BFFF] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.015 12.015 0 002.944 12c.005 3.09 1.488 6.002 4.148 8.05l.004.003A12.008 12.008 0 0012 21.056a12.008 12.008 0 005.908-1.003l.004-.003c2.66-2.048 4.143-4.96 4.148-8.05a12.015 12.015 0 00-2.88-9.056z" />
+                    </svg>
+                    Password Strength Checker
+                </h2>
+                <p class="text-sm text-gray-400">
+                    Test your password strength and get real-time feedback.
+                </p>
+            </div>
+            <div class="mb-4">
+                <label for="password-input" class="block text-gray-300 text-sm font-medium mb-2">Enter your password:</label>
+                <div class="relative">
+                    <input
+                        type="password"
+                        id="password-input"
+                        class="w-full p-3 bg-[#0B0E13] border border-gray-700 rounded-lg pr-12 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00BFFF]"
+                        placeholder="Type your password here..."
+                        aria-label="Enter your password"
+                    />
+                    <button
+                        id="toggle-password"
+                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200 focus:outline-none"
+                        aria-label="Toggle password visibility"
+                    >
+                        <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.575 3.01 9.963 7.172.01.03.01.03 0 .062a1.012 1.012 0 0 1 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.575-3.01-9.963-7.172Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                        <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.506 10.506 0 0 1-4.722 4.293M12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9Z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div id="strength-bar" class="strength-bar h-2.5 rounded-full" style="width: 0%; background-color: #4a5568;"></div>
+                </div>
+            </div>
+
+            <p id="strength-text" class="text-sm font-medium text-gray-400 mb-2">Password Strength: <span class="font-bold text-gray-200">Enter a password</span></p>
+
+            <!-- Security Criteria List -->
+            <div id="criteria-section" class="mt-6">
+                <h3 class="text-lg font-semibold text-gray-200 mb-3">Requirements:</h3>
+                <ul class="space-y-2">
+                    <li id="length-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="length-check" disabled>
+                        <label for="length-check" class="ml-2">At least 8 characters</label>
+                    </li>
+                    <li id="lowercase-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="lowercase-check" disabled>
+                        <label for="lowercase-check" class="ml-2">Contains lowercase letter</label>
+                    </li>
+                    <li id="uppercase-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="uppercase-check" disabled>
+                        <label for="uppercase-check" class="ml-2">Contains uppercase letter</label>
+                    </li>
+                    <li id="number-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="number-check" disabled>
+                        <label for="number-check" class="ml-2">Contains number</label>
+                    </li>
+                    <li id="symbol-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="symbol-check" disabled>
+                        <label for="symbol-check" class="ml-2">Contains special character</label>
+                    </li>
+                    <li id="common-password-criteria" class="flex items-center text-gray-400">
+                        <input type="checkbox" id="common-check" disabled>
+                        <label for="common-check" class="ml-2">Not a common password</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Password Generator Section -->
+        <div id="generator-content" class="p-6 bg-[#12151C] rounded-lg border border-gray-700 mt-8 mb-8 shadow-2xl">
+            <div class="flex flex-col items-center text-center mb-4">
+                <h2 class="text-2xl font-semibold text-gray-200 flex items-center mb-2">
+                    <svg class="w-7 h-7 text-[#00BFFF] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Password Generator
+                </h2>
+                <p class="text-sm text-gray-400">
+                    Generate secure passwords with customizable options
+                </p>
+            </div>
+
+            <div class="relative mb-6">
+                <label for="generated-password-display" class="block text-gray-300 text-sm font-medium mb-2">Generated password will appear here</label>
+                <div class="flex items-center">
+                    <input
+                        type="text"
+                        id="generated-password-display"
+                        class="w-full p-3 bg-[#0B0E13] border border-gray-700 rounded-lg text-gray-100 font-mono text-center text-lg break-all"
+                        readonly
+                        placeholder="Your generated password will appear here"
+                        aria-live="polite"
+                    />
+                    <button
+                        id="copy-button"
+                        class="ml-2 bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                        aria-label="Copy generated password"
+                    >
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-2m-4 0a2 2 0 110-4 2 2 0 010 4zm0 0v10m0-10a2 2 0 100-4 2 2 0 000 4zm-4 4h8" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="copy-message" class="absolute inset-x-0 bottom-full mb-2 hidden bg-green-600 text-white text-center py-2 px-4 rounded-lg text-sm transition-opacity duration-300 opacity-0">
+                    Copied to clipboard!
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <button
+                    id="generate-button"
+                    class="w-full bg-[#00BFFF] hover:bg-[#0099cc] text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#00BFFF] focus:ring-offset-2"
+                    aria-label="Generate password"
+                >
+                    Generate Password
+                </button>
+            </div>
+
+            <div class="mb-4">
+                <label for="password-length" class="block text-gray-300 text-sm font-medium mb-2">Password Length: <span id="length-value">16</span></label>
+                <input
+                    type="range"
+                    id="password-length"
+                    min="6"
+                    max="32"
+                    value="16"
+                    class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                    aria-label="Password length slider"
+                />
+            </div>
+
+            <ul class="space-y-2 mb-6">
+                <li class="flex items-center">
+                    <input type="checkbox" id="include-uppercase" checked>
+                    <label for="include-uppercase" class="ml-2 text-gray-300 text-sm">Uppercase Letters (A-Z)</label>
+                </li>
+                <li class="flex items-center">
+                    <input type="checkbox" id="include-lowercase" checked>
+                    <label for="include-lowercase" class="ml-2 text-gray-300 text-sm">Lowercase Letters (a-z)</label>
+                </li>
+                <li class="flex items-center">
+                    <input type="checkbox" id="include-numbers" checked>
+                    <label for="include-numbers" class="ml-2 text-gray-300 text-sm">Numbers (0-9)</label>
+                </li>
+                <li class="flex items-center">
+                    <input type="checkbox" id="include-symbols" checked>
+                    <label for="include-symbols" class="ml-2 text-gray-300 text-sm">Symbols (!@#$)</label>
+                </li>
+                <li class="flex items-center">
+                    <input type="checkbox" id="exclude-similar">
+                    <label for="exclude-similar" class="ml-2 text-gray-300 text-sm">Exclude Similar Characters (i, l, 1, L, o, 0, O)</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Full-width Footer Section -->
+    <footer class="full-width-footer py-8 text-center">
+        <p class="text-gray-500 text-sm mb-2">
+            © 2025 PasswordHealthChecker.com — Your privacy and security matter.
+        </p>
+        <p class="text-gray-500 text-sm mt-2">
+            Want to strengthen your security? Consider a hardware key like the <a href="https://amzn.to/4mRlFYR" class="text-[#00BFFF] hover:underline" target="_blank" rel="noopener noreferrer">Yubico YubiKey 5C NFC</a> or a portable router for a secure connection like the <a href="https://amzn.to/3KEw3Fy" class="text-[#00BFFF] hover:underline" target="_blank" rel="noopener noreferrer">TP-Link M7000 4G MiFi Router</a>.
+        </p>
+        <p class="text-gray-500 text-xs mt-2">
+            As an Amazon Associate, we may earn commissions from qualifying purchases.
+        </p>
+        <!-- Footer Navigation Links (KEPT) -->
+        <div class="mt-4 flex justify-center space-x-4 text-sm text-gray-400">
+            <a href="index.html" class="hover:text-[#00BFFF]">Home</a>
+            <span>•</span>
+            <a href="about.html" class="hover:text-[#00BFFF]">About</a>
+            <span>•</span>
+            <a href="privacy-policy.html" class="hover:text-[#00BFFF]">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const passwordInput = document.getElementById('password-input');
+        const togglePasswordButton = document.getElementById('toggle-password');
+        const eyeOpenIcon = document.getElementById('eye-open');
+        const eyeClosedIcon = document.getElementById('eye-closed');
+
+        const strengthBar = document.getElementById('strength-bar');
+        const strengthText = document.getElementById('strength-text');
+
+        // Password Generator Checkboxes
+        const passwordLengthSlider = document.getElementById('password-length');
+        const lengthValueSpan = document.getElementById('length-value');
+        const includeUppercase = document.getElementById('include-uppercase');
+        const includeLowercase = document.getElementById('include-lowercase');
+        const includeNumbers = document.getElementById('include-numbers');
+        const includeSymbols = document.getElementById('include-symbols');
+        const excludeSimilar = document.getElementById('exclude-similar');
+        const generateButton = document.getElementById('generate-button');
+        const copyButton = document.getElementById('copy-button');
+        const generatedPasswordDisplay = document.getElementById('generated-password-display');
+        const copyMessage = document.getElementById('copy-message');
+
+        // Character sets for password generation
+        const charSets = {
+            uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            lowercase: 'abcdefghijklmnopqrstuvwxyz',
+            numbers: '0123456789',
+            symbols: '!@#$%^&*()_-+=[]{}|;:,.<>?',
+        };
+        const similarChars = 'il1Lo0O';
+        
+        const commonPasswords = ['password', '123456', 'qwerty', 'admin', '12345678', '123456789', 'password123', 'iloveyou', 'p@ssword'];
+        const criteria = [
+            { id: 'length-criteria', check: (p) => p.length >= 8, checkId: 'length-check' },
+            { id: 'lowercase-criteria', check: (p) => /[a-z]/.test(p), checkId: 'lowercase-check' },
+            { id: 'uppercase-criteria', check: (p) => /[A-Z]/.test(p), checkId: 'uppercase-check' },
+            { id: 'number-criteria', check: (p) => /[0-9]/.test(p), checkId: 'number-check' },
+            { id: 'symbol-criteria', check: (p) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(p), checkId: 'symbol-check' },
+            { id: 'common-password-criteria', check: (p) => !commonPasswords.includes(p.toLowerCase()), checkId: 'common-check' }
+        ];
+
+        /**
+         * Evaluates the strength of a given password and updates the UI.
+         * @param {string} password - The password to evaluate.
+         */
+        function checkPasswordStrength(password) {
+            let score = 0;
+            const metCriteria = {};
+
+            if (password.length === 0) {
+                // Reset to initial state
+                strengthBar.style.width = '0%';
+                strengthBar.style.backgroundColor = '#4a5568';
+                strengthText.innerHTML = 'Password Strength: <span class="font-bold text-gray-200">Enter a password</span>';
+                
+                // Reset all checkboxes to unchecked and gray text
+                criteria.forEach(c => {
+                    const element = document.getElementById(c.id);
+                    const checkbox = document.getElementById(c.checkId);
+                    element.classList.remove('text-green-500', 'text-red-500');
+                    element.classList.add('text-gray-400');
+                    checkbox.checked = false;
+                });
+                return;
+            }
+
+            // Check each criterion and update UI
+            criteria.forEach(c => {
+                const element = document.getElementById(c.id);
+                const checkbox = document.getElementById(c.checkId);
+                const isMet = c.check(password);
+                metCriteria[c.id] = isMet;
+
+                if (isMet) {
+                    score++;
+                    element.classList.remove('text-gray-400', 'text-red-500');
+                    element.classList.add('text-green-500');
+                    checkbox.checked = true;
+                } else {
+                    element.classList.remove('text-gray-400', 'text-green-500');
+                    element.classList.add('text-red-500');
+                    checkbox.checked = false;
+                }
+            });
+
+            // Determine strength level and color
+            let strengthLevel = 'Weak';
+            let barColor = '#dc2626'; // Red
+
+            if (score >= 3 && score < 5) {
+                strengthLevel = 'Medium';
+                barColor = '#f59e0b'; // Orange
+            } else if (score >= 5 && score < 6) {
+                strengthLevel = 'Strong';
+                barColor = '#16a34a'; // Green
+            } else if (score === 6) {
+                strengthLevel = 'Excellent';
+                barColor = '#059669'; // Darker Green
+            }
+
+            // Adjust score if it's a common password
+            if (!metCriteria['common-password-criteria']) {
+                score = 0;
+                strengthLevel = 'Weak';
+                barColor = '#dc2626';
+            }
+
+            // Update UI
+            strengthBar.style.width = `${(score / criteria.length) * 100}%`;
+            strengthBar.style.backgroundColor = barColor;
+            strengthText.innerHTML = `Password Strength: <span class="font-bold" style="color: ${barColor}">${strengthLevel}</span>`;
+        }
+
+        /**
+         * Generates a random password based on selected criteria.
+         * @returns {string} The generated password.
+         */
+        function generatePassword() {
+            const length = parseInt(passwordLengthSlider.value);
+            let characterPool = '';
+            let generatedPassword = '';
+
+            const selectedTypes = [];
+            if (includeUppercase.checked) selectedTypes.push('uppercase');
+            if (includeLowercase.checked) selectedTypes.push('lowercase');
+            if (includeNumbers.checked) selectedTypes.push('numbers');
+            if (includeSymbols.checked) selectedTypes.push('symbols');
+
+            // If no character type is selected, default to lowercase and numbers
+            if (selectedTypes.length === 0) {
+                characterPool = charSets.lowercase + charSets.numbers;
+                selectedTypes.push('lowercase', 'numbers'); // Ensure at least these types are considered for initial char
+            } else {
+                selectedTypes.forEach(type => {
+                    characterPool += charSets[type];
+                });
+            }
+
+            // Filter out similar characters if the option is checked
+            if (excludeSimilar.checked) {
+                characterPool = characterPool.split('').filter(char => !similarChars.includes(char)).join('');
+            }
+
+            // Ensure at least one character from each selected type is included
+            selectedTypes.forEach(type => {
+                const chars = excludeSimilar.checked ? charSets[type].split('').filter(char => !similarChars.includes(char)).join('') : charSets[type];
+                const randomChar = chars.charAt(Math.floor(Math.random() * chars.length));
+                generatedPassword += randomChar;
+            });
+
+            // Fill the rest of the password length with random characters from the combined pool
+            for (let i = generatedPassword.length; i < length; i++) {
+                const randomChar = characterPool.charAt(Math.floor(Math.random() * characterPool.length));
+                generatedPassword += randomChar;
+            }
+
+            // Shuffle the generated password to randomize the order of initial characters
+            generatedPassword = generatedPassword.split('').sort(() => Math.random() - 0.5).join('');
+
+            // Trim to exact length if initial characters made it longer
+            return generatedPassword.substring(0, length);
+        }
+
+        /**
+         * Copies text to the clipboard.
+         * @param {string} text - The text to copy.
+         */
+        function copyToClipboard(text) {
+            try {
+                // Create a temporary textarea element
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+
+                // Select and copy the text
+                textarea.select();
+                document.execCommand('copy');
+
+                // Show copy message
+                copyMessage.classList.remove('hidden');
+                copyMessage.classList.add('opacity-100');
+                setTimeout(() => {
+                    copyMessage.classList.remove('opacity-100');
+                    copyMessage.classList.add('opacity-0');
+                    setTimeout(() => {
+                        copyMessage.classList.add('hidden');
+                    }, 300);
+                }, 1500);
+
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        // Event Listeners
+
+        // Password Strength Checker
+        passwordInput.addEventListener('input', (event) => {
+            checkPasswordStrength(event.target.value);
+        });
+
+        // Toggle password visibility
+        togglePasswordButton.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeOpenIcon.classList.add('hidden');
+                eyeClosedIcon.classList.remove('hidden');
+            } else {
+                passwordInput.type = 'password';
+                eyeOpenIcon.classList.remove('hidden');
+                eyeClosedIcon.classList.add('hidden');
+            }
+        });
+
+        // Password Generator
+        passwordLengthSlider.addEventListener('input', () => {
+            lengthValueSpan.textContent = passwordLengthSlider.value;
+        });
+
+        generateButton.addEventListener('click', () => {
+            const newPassword = generatePassword();
+            generatedPasswordDisplay.value = newPassword;
+            // Optionally, check strength of generated password
+            checkPasswordStrength(newPassword);
+        });
+
+        copyButton.addEventListener('click', () => {
+            const passwordToCopy = generatedPasswordDisplay.value;
+            if (passwordToCopy) {
+                copyToClipboard(passwordToCopy);
+            }
+        });
+
+        // Initial setup on page load
+        window.onload = () => {
+            // Generate an initial password when the page loads
+            const initialPassword = generatePassword();
+            generatedPasswordDisplay.value = initialPassword;
+            // Don't check strength on load to keep UI neutral
+            checkPasswordStrength(''); 
+        };
+    </script>
+</body>
+</html>

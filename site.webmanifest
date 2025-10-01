@@ -1,0 +1,36 @@
+{
+  "name": "Password Health Checker",
+  "short_name": "PHC",
+  "description": "Check your password strength and generate secure passwords with 100% client-side privacy.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0C0F15",
+  "theme_color": "#00BFFF",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

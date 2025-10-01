@@ -1,0 +1,14 @@
+/* TEAM */
+Created by: Dragonfire Creative Studio
+Lead: Michael Webb
+Website: https://www.passwordhealthchecker.com
+Email: dragonfiredesignstudio [at] gmail [dot] com
+
+/* SITE */
+Last update: 2025-09-29
+Standards: HTML5, CSS3, JavaScript, Tailwind
+Tools: Vercel, GitHub, Affinity Designer, Figma
+
+/* THANKS */
+Inspired by: The open-source community & indie web makers
+Special thanks: Everyone who values security and privacy
