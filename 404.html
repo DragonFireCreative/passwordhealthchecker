@@ -5,54 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary -->
-  <title>404 Page Not Found | Password Health Checker</title>
-  <meta name="description" content="The page you’re looking for does not exist. Return to the homepage and check your password security." />
-  <meta name="robots" content="noindex,follow" /> <!-- Don't index, but let crawlers follow links -->
+  <title>404 — Access Denied | Password Health Checker</title>
+  <meta name="description" content="Oops! The page you were looking for doesn’t exist. Return home and secure your digital world with Password Health Checker." />
   <link rel="canonical" href="https://www.passwordhealthchecker.com/404.html" />
 
-  <!-- Open Graph (absolute GH Pages URL for staging) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://dragonfirecreative.github.io/passwordhealthchecker/404.html" />
-  <meta property="og:title" content="404 Page Not Found | Password Health Checker" />
-  <meta property="og:description" content="The page you’re looking for does not exist. Head back to Password Health Checker to try our free tools." />
-  <meta property="og:image" content="https://dragonfirecreative.github.io/passwordhealthchecker/og-404.png" />
+  <meta property="og:url" content="https://www.passwordhealthchecker.com/404.html" />
+  <meta property="og:title" content="404 — Access Denied | Password Health Checker" />
+  <meta property="og:description" content="Oops! This page doesn’t exist. Head back home and try again securely." />
+  <meta property="og:image" content="https://www.passwordhealthchecker.com/og-404.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://dragonfirecreative.github.io/passwordhealthchecker/404.html" />
-  <meta name="twitter:title" content="404 Page Not Found | Password Health Checker" />
-  <meta name="twitter:description" content="The page you’re looking for does not exist. Head back to Password Health Checker to try our free tools." />
-  <meta name="twitter:image" content="https://dragonfirecreative.github.io/passwordhealthchecker/og-404.png" />
+  <meta name="twitter:url" content="https://www.passwordhealthchecker.com/404.html" />
+  <meta name="twitter:title" content="404 — Access Denied | Password Health Checker" />
+  <meta name="twitter:description" content="Page not found. Return to Password Health Checker and generate a stronger path forward." />
+  <meta name="twitter:image" content="https://www.passwordhealthchecker.com/og-404.png" />
 
   <!-- Helpful -->
   <meta name="author" content="Dragonfire Creative Studio" />
+  <meta name="robots" content="noindex, follow" />
 
-  <!-- Favicons + PWA (relative paths for GH Pages) -->
-  <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#00BFFF" />
-  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "526649c52b894849b9757e54098a8a3f"}'></script>
-  <!-- End Cloudflare Web Analytics -->
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Inter', sans-serif; background-color: #0C0F15; color: #e2e8f0; }
-  </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen text-center px-6">
-  <div class="mb-6">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 text-[#00BFFF] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm-6 0c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zM4 15c0 2.21 3.582 4 8 4s8-1.79 8-4" />
-    </svg>
+<body class="bg-[#0C0F15] text-gray-200 flex flex-col items-center justify-center min-h-screen font-sans px-4">
+  
+  <!-- Lock Icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-[#00BFFF] mb-6" fill="currentColor" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25z" clip-rule="evenodd"/>
+  </svg>
+
+  <!-- Headline -->
+  <h1 class="text-4xl font-extrabold text-[#00BFFF] mb-4">❌ 404 — Access Denied</h1>
+  <p class="text-gray-400 text-lg mb-6 text-center max-w-md">
+    Looks like this page doesn’t exist… just like your old weak passwords.
+  </p>
+
+  <!-- Fake Password Input Joke -->
+  <div class="w-full max-w-sm bg-[#12151C] border border-gray-700 rounded-lg p-6 shadow-md mb-6">
+    <label for="fake-password" class="block text-sm font-medium text-gray-300 mb-2">
+      Enter password to continue:
+    </label>
+    <input 
+      type="password" 
+      id="fake-password" 
+      class="w-full p-3 rounded-lg bg-[#0B0E13] border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00BFFF]" 
+      placeholder="Type here..."
+    />
+    <p id="fake-feedback" class="text-sm mt-2 text-gray-500">Hint: it's not <em>password</em> 😉</p>
   </div>
-  <h1 class="text-4xl font-extrabold text-[#00BFFF] mb-4">404 — Page Not Found</h1>
-  <p class="text-gray-400 mb-8">Sorry, the page you’re looking for doesn’t exist. It may have been moved or deleted.</p>
-  <a href="/" class="bg-[#00BFFF] text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-[#0099cc] transition">Go Home</a>
+
+  <!-- CTA -->
+  <a href="index.html" class="bg-[#00BFFF] hover:bg-[#0099cc] text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105">
+    🔑 Back to Home
+  </a>
+
+  <script>
+    const fakeInput = document.getElementById("fake-password");
+    const feedback = document.getElementById("fake-feedback");
+    let tries = 0;
+
+    const weakPasswords = ["password","123456","qwerty","admin"];
+
+    fakeInput.addEventListener("input", () => {
+      const val = fakeInput.value.toLowerCase();
+      tries++;
+
+      if (weakPasswords.includes(val)) {
+        feedback.textContent = "Too weak — try again 🔒";
+        feedback.className = "text-red-500 text-sm mt-2";
+      } else if (val.length < 6) {
+        feedback.textContent = "Not strong enough — add more characters.";
+        feedback.className = "text-yellow-500 text-sm mt-2";
+      } else if (tries >= 3) {
+        feedback.textContent = "Redirecting you to safety… ✅";
+        feedback.className = "text-green-500 text-sm mt-2";
+        setTimeout(() => { window.location.href = "index.html"; }, 1500);
+      } else {
+        feedback.textContent = "Hmm… not quite right. Try again.";
+        feedback.className = "text-gray-400 text-sm mt-2";
+      }
+    });
+  </script>
 </body>
 </html>
-
